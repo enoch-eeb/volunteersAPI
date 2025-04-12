@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Youth & Young Adult GSRI-K</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container">
+    <div class="filter-section">
+      <div class="filter-group">
+        <label for="bidangFilter" class="filter-label">Filter by Bidang:</label>
+        <select id="bidangFilter" class="filter-select">
+          <option value="all">All Bidang</option>
+          <% bidangList.forEach(bidang => { %>
+            <option value="<%= bidang %>"><%= bidang %></option>
+          <% }); %>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table id="volunteersTable">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Lengkap</th>  
+            <th>Bidang Pelayanan</th>
+            <th>Alat Musik</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% volunteers.forEach((volunteer, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= volunteer.nama_lengkap %></td> 
+              <td>
+                <% volunteer.bidang_pelayanan.forEach(bidang => { %>
+                  <span class="badge badge-primary"><%= bidang %></span>
+                <% }); %>
+              </td>
+              <td>
+                <% if (volunteer.alat_musik && volunteer.alat_musik.length > 0) { %>
+                  <% volunteer.alat_musik.forEach(alat => { %>
+                    <span class="badge badge-success"><%= alat %></span>
+                  <% }); %>
+                <% } else { %>
+                  <span>-</span>
+                <% } %>
+              </td>
+              <td><%= volunteer.email || '-' %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
