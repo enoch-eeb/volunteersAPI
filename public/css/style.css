@@ -6,7 +6,7 @@
   --light: rgba(248, 249, 250, 0.85);
   --dark: #212529;
   --success: #4cc9f0;
-  --border-radius: 16px;
+  --border-radius: 12px; /* Diubah dari 16px untuk sudut yang lebih halus */
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -131,8 +131,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden; /* Diubah dari 'auto' untuk rounded corners */
   transition: var(--transition);
 }
 
@@ -147,12 +146,15 @@ body {
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Diubah untuk rounded corners */
+  border-spacing: 0;
   min-width: 600px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 th, td {
-  padding: 1.2rem;
+  padding: 1rem 1.2rem;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -166,6 +168,24 @@ th {
   letter-spacing: 0.8px;
   position: sticky;
   top: 0;
+}
+
+/* Rounded corners untuk header */
+th:first-child {
+  border-top-left-radius: var(--border-radius);
+}
+
+th:last-child {
+  border-top-right-radius: var(--border-radius);
+}
+
+/* Rounded corners untuk baris terakhir */
+tr:last-child td:first-child {
+  border-bottom-left-radius: var(--border-radius);
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: var(--border-radius);
 }
 
 tr:nth-child(even) {
@@ -252,7 +272,6 @@ tr:hover {
     font-size: 0.9rem;
   }
   
-  /* Enhanced colors for mobile */
   .table-container {
     background: rgba(255, 255, 255, 0.3);
     margin: 0 -0.5rem;
@@ -298,5 +317,16 @@ tr:hover {
   th, td {
     padding: 0.7rem;
     font-size: 0.85rem;
+  }
+  
+  /* Adjust rounded corners for mobile */
+  table {
+    border-radius: 0;
+  }
+  
+  th:first-child, th:last-child,
+  tr:last-child td:first-child, 
+  tr:last-child td:last-child {
+    border-radius: 0;
   }
 }
